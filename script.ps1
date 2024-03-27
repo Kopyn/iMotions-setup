@@ -22,3 +22,9 @@ if (-not (Test-Path -Path $destinationDirectory -PathType Container)) {
 $destinationFilePath = Join-Path -Path $destinationDirectory -ChildPath $newFilename
 Move-Item -Path $sourceFilePath -Destination $destinationFilePath -Force
 Write-Host "File '$originalFilename' moved successfully to '$destinationFilePath' with the new filename '$newFilename'"
+
+# Use Git to stash changes
+git stash
+
+# Revert to the last commit
+git reset --hard HEAD
