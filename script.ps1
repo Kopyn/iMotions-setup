@@ -1,6 +1,9 @@
 # Prompt the user to input the filename
 $newFilename = Read-Host "Enter your name:"
 
+# Generate a new GUID
+$guid = [guid]::NewGuid()
+
 # Define the source directory, destination directory, and original filename
 $sourceDirectory = "."
 $destinationDirectory = "./results"
@@ -17,6 +20,9 @@ if (-not (Test-Path -Path $sourceFilePath -PathType Leaf)) {
 if (-not (Test-Path -Path $destinationDirectory -PathType Container)) {
     New-Item -Path $destinationDirectory -ItemType Directory | Out-Null
 }
+
+# Append the GUID to the output filename
+$outputFilename = "$newFilename-$guid.txt"
 
 # Move the file to the destination directory with the new filename
 $destinationFilePath = Join-Path -Path $destinationDirectory -ChildPath $newFilename
